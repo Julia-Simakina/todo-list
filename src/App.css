@@ -29,6 +29,7 @@
 .todo-container {
   width: 550px;
   margin: 50px auto 0;
+  background-color: #fff;
 }
 
 .todo-input {
@@ -45,17 +46,17 @@
 }
 
 .todo-input:focus {
-  border: 2px solid rgb(55, 0, 255);
+  outline: 2px solid rgb(55, 0, 255);
   border-radius: 3px;
-  outline: none;
 }
 
 .item {
   display: flex;
-  background-color: #fff;
   position: relative;
   font-size: 22px;
   border-bottom: 1px solid #ededed;
+  max-width: 550px;
+  padding: 15px 15px 15px 60px;
 }
 
 .item__checkbox {
@@ -69,6 +70,60 @@
 }
 
 .item__description {
-  max-width: 550px;
-  padding: 15px 15px 15px 60px;
+  max-width: 450px;
+  word-break: break-all;
+}
+
+.filtres {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+}
+
+.todo-params {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  font-size: 16px;
+}
+
+.button {
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  background-color: inherit;
+}
+
+.button_filter {
+  padding: 3px 7px;
+}
+
+.button_filter:hover {
+  border-radius: 3px;
+  outline: 2px solid rgb(55, 0, 255);
+}
+
+.button_clear:hover {
+  text-decoration: underline;
+}
+
+.item__delete-btn {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 20px;
+  font-size: 25px;
+  line-height: 26px;
+  font-weight: 600;
+  color: #cfcfcf;
+}
+
+.item__delete-btn:hover {
+  color: #db0000;
 }
