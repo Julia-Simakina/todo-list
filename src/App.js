@@ -1,26 +1,11 @@
-import './App.css';
-import Header from './components/Header';
-import AddTodo from './components/AddTodo';
-import TodoList from './components/TodoList';
-import FilterButton from './components/FilterButton';
+import Header from "./components/Header";
+import TodoContainer from "./components/TodoContainer";
 
 function App() {
   return (
-    <div className='App'>
+    <div className="App">
       <Header />
-      <div className='todo-container'>
-        <AddTodo />
-        <TodoList />
-        <div className='todo-params'>
-          <span>1 todos left</span>
-          <ul className='filtres'>
-            <FilterButton name='All' />
-            <FilterButton name='Active' />
-            <FilterButton name='Completed' />
-          </ul>
-          <button className='button button_clear'>Clear completed</button>
-        </div>
-      </div>
+      <TodoContainer />
     </div>
   );
 }
