@@ -1,33 +1,56 @@
+import { useDispatch } from "react-redux";
+import { removeTodo, toggleTodo, editTodo } from "../store/actions/actions";
 import { useState } from "react";
+import EditField from "./EditField";
+
 export default function TodoItem(props) {
-  const [isChecked, setIsChecked] = useState(props.todo.completed);
+  const [editId, setEditId] = useState(null);
+  const [editText, setEditText] = useState("");
+
+  const dispatch = useDispatch();
+
+  const handleRemoveTodo = () => {
+    dispatch(removeTodo(props.todo.id));
+  };
 
   const handleCheckboxChange = () => {
-    setIsChecked(!isChecked);
-    props.todo.completed = !isChecked;
+    dispatch(toggleTodo(props.todo.id));
+  };
+
+  const handleEditTodo = () => {
+    dispatch(editTodo(props.todo.id, props.todo.text));
+    // setEditId(null);
+    // setEditText("");
   };
 
   return (
     <li className="todo-list__item item" id={props.todo.id}>
-      <input
-        type="checkbox"
-        className="item__checkbox"
-        onChange={handleCheckboxChange}
-        checked={isChecked}
-      />
+      {!editId ? (
+        <>
+          {" "}
+          <input
+            type="checkbox"
+            className="item__checkbox"
+            onChange={handleCheckboxChange}
+            checked={props.todo.completed}
+          />
+          <label
+            className={`item__description ${
+              props.todo.completed && "item__description_checked"
+            }`}
+            onDoubleClick={() => {
+              setEditId(props.todo.id);
+              setEditText(props.todo.text);
+            }}
+          >
+            {props.todo.text}
+          </label>
+        </>
+      ) : (
+        <input value={props.todo.text} onChange={() => handleEditTodo()} />
+      )}
 
-      <label
-        className={`item__description ${
-          isChecked && "item__description_checked"
-        }`}
-      >
-        {props.todo.text}
-      </label>
-
-      <button
-        className="button item__delete-btn"
-        onClick={() => props.onRemove(props.todo.id)}
-      >
+      <button className="button item__delete-btn" onClick={handleRemoveTodo}>
         ×
       </button>
     </li>

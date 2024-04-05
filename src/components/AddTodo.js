@@ -1,7 +1,14 @@
 import { useState } from "react";
+import { addTodo } from "../store/actions/actions";
+import { useDispatch } from "react-redux";
 
-export default function AddTodo(props) {
+export default function AddTodo() {
   const [text, setText] = useState(""); //текст инпута
+  const dispatch = useDispatch();
+
+  const addNewTodo = (newTodo) => {
+    dispatch(addTodo(newTodo));
+  };
 
   function createTodo(text, completed = false) {
     return {
@@ -14,9 +21,7 @@ export default function AddTodo(props) {
   const handleKeyDown = (event) => {
     if (event.key === "Enter" && text.trim()) {
       const newTodo = createTodo(text);
-      props.onAdd(newTodo);
-
-      console.log(newTodo);
+      addNewTodo(newTodo);
       setText("");
     }
   };

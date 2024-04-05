@@ -82,6 +82,8 @@ body {
 .item__description {
   max-width: 450px;
   word-break: break-all;
+  border: none;
+  font-size: inherit;
 }
 
 .item__description_checked {

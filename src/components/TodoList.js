@@ -1,16 +1,13 @@
 import TodoItem from "./TodoItem";
-export default function TodoList(props) {
+import { useSelector } from "react-redux";
+
+export default function TodoList() {
+  const { todoList } = useSelector((state) => state.todos);
+
   return (
     <ul className="todo-list">
-      {props.todos.map((todo) => (
-        <TodoItem
-          // id={todo.id}
-          key={todo.id}
-          // text={todo.text}
-          // completed={todo.completed}
-          todo={todo}
-          onRemove={props.onRemove}
-        />
+      {todoList.map((todo) => (
+        <TodoItem key={todo.id} todo={todo} />
       ))}
     </ul>
   );
