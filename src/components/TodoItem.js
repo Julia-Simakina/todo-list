@@ -1,11 +1,11 @@
-import { useDispatch } from "react-redux";
-import { removeTodo, toggleTodo, editTodo } from "../store/actions/actions";
-import { useState } from "react";
-import EditField from "./EditField";
+import { useDispatch } from 'react-redux';
+import { removeTodo, toggleTodo, editTodo } from '../store/actions/actions';
+import { useState } from 'react';
+import EditField from './EditField';
 
 export default function TodoItem(props) {
   const [editId, setEditId] = useState(null);
-  const [editText, setEditText] = useState("");
+  const [editText, setEditText] = useState('');
 
   const dispatch = useDispatch();
 
@@ -18,26 +18,28 @@ export default function TodoItem(props) {
   };
 
   const handleEditTodo = () => {
-    dispatch(editTodo(props.todo.id, props.todo.text));
-    // setEditId(null);
-    // setEditText("");
+    dispatch(editTodo(editId, editText));
+    setEditId(null);
+    setEditText('');
+  };
+
+  const handleEditChange = e => {
+    setEditText(e.target.value);
   };
 
   return (
-    <li className="todo-list__item item" id={props.todo.id}>
+    <li className='todo-list__item item' id={props.todo.id}>
       {!editId ? (
         <>
-          {" "}
+          {' '}
           <input
-            type="checkbox"
-            className="item__checkbox"
+            type='checkbox'
+            className='item__checkbox'
             onChange={handleCheckboxChange}
             checked={props.todo.completed}
           />
           <label
-            className={`item__description ${
-              props.todo.completed && "item__description_checked"
-            }`}
+            className={`item__description ${props.todo.completed && 'item__description_checked'}`}
             onDoubleClick={() => {
               setEditId(props.todo.id);
               setEditText(props.todo.text);
@@ -47,10 +49,10 @@ export default function TodoItem(props) {
           </label>
         </>
       ) : (
-        <input value={props.todo.text} onChange={() => handleEditTodo()} />
+        <input value={editText} onChange={handleEditChange} onBlur={() => handleEditTodo()} />
       )}
 
-      <button className="button item__delete-btn" onClick={handleRemoveTodo}>
+      <button className='button item__delete-btn' onClick={handleRemoveTodo}>
         ×
       </button>
     </li>
