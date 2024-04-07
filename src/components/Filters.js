@@ -1,22 +1,26 @@
-import FilterButton from "./FilterButton";
-import { useSelector } from "react-redux";
+import { useMemo } from 'react';
+import FilterButton from './FilterButton';
+import { useSelector } from 'react-redux';
 
 export default function Filters(props) {
-  const { todoList } = useSelector((state) => state.todos);
+  const { todoList } = useSelector(state => state.todos);
 
-  const leftTodos = todoList.filter((todo) => todo.completed === false).length;
+  const leftTodos = useMemo(
+    () => todoList.filter(todo => todo.completed === false).length,
+    [todoList]
+  );
 
   return (
-    <div className="todo-params">
+    <div className='todo-params'>
       <span>
-        {leftTodos} {leftTodos === 1 ? "todo" : "todos"} left
+        {leftTodos} {leftTodos === 1 ? 'todo' : 'todos'} left
       </span>
-      <ul className="filtres">
-        <FilterButton name="All" id="all" />
-        <FilterButton name="Active" id="active" />
-        <FilterButton name="Completed" id="completed" onClick={props.onClick} />
+      <ul className='filtres'>
+        <FilterButton name='All' id='all' />
+        <FilterButton name='Active' id='active' />
+        <FilterButton name='Completed' id='completed' onClick={props.onClick} />
       </ul>
-      <button className="button button_clear">Clear completed</button>
+      <button className='button button_clear'>Clear completed</button>
     </div>
   );
 }

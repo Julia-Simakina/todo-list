@@ -18,6 +18,9 @@ export default function TodoItem(props) {
   };
 
   const handleEditTodo = () => {
+    if (!editText.trim()) {
+      handleRemoveTodo();
+    }
     dispatch(editTodo(editId, editText));
     setEditId(null);
     setEditText('');
@@ -27,11 +30,16 @@ export default function TodoItem(props) {
     setEditText(e.target.value);
   };
 
+  const checkEnterKey = e => {
+    if (e.key !== 'Enter') return;
+
+    handleEditTodo();
+  };
+
   return (
     <li className='todo-list__item item' id={props.todo.id}>
       {!editId ? (
         <>
-          {' '}
           <input
             type='checkbox'
             className='item__checkbox'
@@ -47,14 +55,18 @@ export default function TodoItem(props) {
           >
             {props.todo.text}
           </label>
+          <button className='button item__delete-btn' onClick={handleRemoveTodo}>
+            ×
+          </button>
         </>
       ) : (
-        <input value={editText} onChange={handleEditChange} onBlur={() => handleEditTodo()} />
+        <EditField
+          value={editText}
+          onChange={handleEditChange}
+          onKeyDown={checkEnterKey}
+          onBlur={() => handleEditTodo()}
+        />
       )}
-
-      <button className='button item__delete-btn' onClick={handleRemoveTodo}>
-        ×
-      </button>
     </li>
   );
 }
