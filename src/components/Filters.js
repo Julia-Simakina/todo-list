@@ -1,71 +1,42 @@
-import { useDispatch } from "react-redux";
-import { useSelector } from "react-redux";
-import {
-  removeCompletedTodo,
-  setVisibilityFilter,
-} from "../store/actions/actions";
-import { getVisibleTodos } from "../store/selectors";
-import FilterButton from "./FilterButton";
-import {
-  SHOW_ALL,
-  SHOW_ACTIVE,
-  SHOW_COMPLETED,
-} from "../store/actions/actionNames";
+import React from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { removeCompletedTodo, setVisibilityFilter } from '../store/actions/actions';
+import FilterButton from './FilterButton';
+import { SHOW_ALL, SHOW_ACTIVE, SHOW_COMPLETED } from '../store/actions/actionNames';
+import TodoCounter from './Counter';
 
-export default function Filters(props) {
-  const { filteredTodoLength } = useSelector(getVisibleTodos);
+const filterButtons = [
+  { id: 'All', filter: SHOW_ALL },
+  { id: 'Active', filter: SHOW_ACTIVE },
+  { id: 'Completed', filter: SHOW_COMPLETED }
+];
 
+export default function Filters() {
   const dispatch = useDispatch();
+  const visibilityFilter = useSelector(state => state.todos.currentFilter);
 
-  const handleRemoveCompletedTodo = () => {
+  const handleClearCompletedTodo = () => {
     dispatch(removeCompletedTodo());
   };
 
-  const showCompletedTodo = () => {
-    console.log(
-      "setVisibilityFilter(SHOW_COMPLETED) >>",
-      setVisibilityFilter(SHOW_COMPLETED)
-    );
-    dispatch(setVisibilityFilter(SHOW_COMPLETED));
+  const handleSetVisibilityFilter = filter => {
+    dispatch(setVisibilityFilter(filter));
   };
-
-  const showActiveTodo = () => {
-    console.log(
-      "setVisibilityFilter(SHOW_ACTIVE) >>",
-      setVisibilityFilter(SHOW_ACTIVE)
-    );
-    dispatch(setVisibilityFilter(SHOW_ACTIVE));
-  };
-
-  const showAllTodo = () => {
-    console.log(
-      "setVisibilityFilter(SHOW_ALL) >>",
-      setVisibilityFilter(SHOW_ALL)
-    );
-    dispatch(setVisibilityFilter(SHOW_ALL));
-  };
-
-  // let leftTodos = showActiveTodo();
-  console.log("leftTodos", setVisibilityFilter(SHOW_ALL));
 
   return (
-    <div className="todo-params">
-      <span>
-        {filteredTodoLength} {filteredTodoLength === 1 ? "todo" : "todos"} left
-      </span>
-      <ul className="filtres">
-        <FilterButton name="All" id="all" onClick={showAllTodo} />
-        <FilterButton name="Active" id="active" onClick={showActiveTodo} />
-        <FilterButton
-          name="Completed"
-          id="completed"
-          onClick={showCompletedTodo}
-        />
+    <div className='todo-params'>
+      <TodoCounter />
+      <ul className='filters'>
+        {filterButtons.map(button => (
+          <FilterButton
+            key={button.id}
+            name={button.id}
+            isActive={visibilityFilter === button.filter}
+            onClick={() => handleSetVisibilityFilter(button.filter)}
+          />
+        ))}
       </ul>
-      <button
-        className="button button_clear"
-        onClick={handleRemoveCompletedTodo}
-      >
+      <button className='button button_clear' onClick={handleClearCompletedTodo}>
         Clear completed
       </button>
     </div>
