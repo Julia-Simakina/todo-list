@@ -11,14 +11,17 @@ import { SHOW_ALL } from "../actions/actionNames";
 const getInitialState = () => {
   return {
     todoList: [],
-    // currentFilter: SHOW_ALL,
+    currentFilter: SHOW_ALL,
   };
 };
 
 export const todosReducer = (state = getInitialState(), action) => {
   switch (action.type) {
-    // case SET_VISIBILITY_FILTER:
-    //   return action.filter;
+    case SET_VISIBILITY_FILTER:
+      return {
+        ...state,
+        currentFilter: action.filter,
+      };
     case ADD_TODO:
       return {
         ...state,

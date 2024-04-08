@@ -5,9 +5,6 @@ import {
   TOGGLE_TODO,
   EDIT_TODO,
   SET_VISIBILITY_FILTER,
-  SHOW_ALL,
-  SHOW_ACTIVE,
-  SHOW_COMPLETED,
 } from "./actionNames";
 
 export const addTodo = (newTodo) => {
@@ -48,16 +45,3 @@ export const setVisibilityFilter = (filter) => ({
   type: SET_VISIBILITY_FILTER,
   filter,
 });
-
-// export const setVisibilityFilter = (filter) => {
-//   return {
-//     type: VisibilityFilters,
-//     payload: filter,
-//   };
-// };
-
-// export const VisibilityFilters = {
-//   SHOW_ALL,
-//   SHOW_COMPLETED,
-//   SHOW_ACTIVE,
-// };

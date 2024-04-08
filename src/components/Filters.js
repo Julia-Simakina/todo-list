@@ -1,5 +1,4 @@
 import { useDispatch } from "react-redux";
-import { useMemo } from "react";
 import { useSelector } from "react-redux";
 import {
   removeCompletedTodo,
@@ -13,14 +12,8 @@ import {
   SHOW_COMPLETED,
 } from "../store/actions/actionNames";
 
-export default function Filters() {
-  //const { todoList } = useSelector((state) => state.todos);
-  //const { todoList } = useSelector(getVisibleTodos);
-
-  // const leftTodos = useMemo(
-  //   () => todoList.filter((todo) => todo.completed === false).length,
-  //   [todoList]
-  // );
+export default function Filters(props) {
+  const { filteredTodoLength } = useSelector(getVisibleTodos);
 
   const dispatch = useDispatch();
 
@@ -44,13 +37,24 @@ export default function Filters() {
     dispatch(setVisibilityFilter(SHOW_ACTIVE));
   };
 
+  const showAllTodo = () => {
+    console.log(
+      "setVisibilityFilter(SHOW_ALL) >>",
+      setVisibilityFilter(SHOW_ALL)
+    );
+    dispatch(setVisibilityFilter(SHOW_ALL));
+  };
+
+  // let leftTodos = showActiveTodo();
+  console.log("leftTodos", setVisibilityFilter(SHOW_ALL));
+
   return (
     <div className="todo-params">
-      {/* <span>
-        {leftTodos} {leftTodos === 1 ? "todo" : "todos"} left
-      </span> */}
+      <span>
+        {filteredTodoLength} {filteredTodoLength === 1 ? "todo" : "todos"} left
+      </span>
       <ul className="filtres">
-        <FilterButton name="All" id="all" />
+        <FilterButton name="All" id="all" onClick={showAllTodo} />
         <FilterButton name="Active" id="active" onClick={showActiveTodo} />
         <FilterButton
           name="Completed"
