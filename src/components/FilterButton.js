@@ -1,7 +1,9 @@
 export default function FilterButton(props) {
   return (
     <li>
-      <button className="button button_filter">{props.name}</button>
+      <button onClick={props.onClick} className="button button_filter">
+        {props.name}
+      </button>
     </li>
   );
 }

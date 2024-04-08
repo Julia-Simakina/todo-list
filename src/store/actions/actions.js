@@ -1,42 +1,63 @@
 import {
   ADD_TODO,
   REMOVE_TODO,
+  REMOVE_COMPLETED_TODO,
   TOGGLE_TODO,
   EDIT_TODO,
-  SET_VISIBILITY_FILTER
-} from './actionNames';
+  SET_VISIBILITY_FILTER,
+  SHOW_ALL,
+  SHOW_ACTIVE,
+  SHOW_COMPLETED,
+} from "./actionNames";
 
-export const addTodo = newTodo => {
+export const addTodo = (newTodo) => {
   return {
     type: ADD_TODO,
-    payload: newTodo
+    payload: newTodo,
   };
 };
 
-export const removeTodo = id => {
+export const removeTodo = (id) => {
   return {
     type: REMOVE_TODO,
-    payload: { id }
+    payload: { id },
   };
 };
 
-export const toggleTodo = id => {
+export const removeCompletedTodo = () => {
+  return {
+    type: REMOVE_COMPLETED_TODO,
+  };
+};
+
+export const toggleTodo = (id) => {
   return {
     type: TOGGLE_TODO,
-    payload: { id }
+    payload: { id },
   };
 };
 
 export const editTodo = (id, newText) => {
   return {
     type: EDIT_TODO,
-    payload: { id, newText }
+    payload: { id, newText },
   };
 };
 
-export const setVisibilityFilter = filter => {
-  return {
-    type: SET_VISIBILITY_FILTER,
-    payload: filter
-  };
-};
+export const setVisibilityFilter = (filter) => ({
+  type: SET_VISIBILITY_FILTER,
+  filter,
+});
+
+// export const setVisibilityFilter = (filter) => {
+//   return {
+//     type: VisibilityFilters,
+//     payload: filter,
+//   };
+// };
+
+// export const VisibilityFilters = {
+//   SHOW_ALL,
+//   SHOW_COMPLETED,
+//   SHOW_ACTIVE,
+// };
