@@ -5,6 +5,7 @@ import {
   TOGGLE_TODO,
   EDIT_TODO,
   SET_VISIBILITY_FILTER,
+  TOGGLE_ALL_TODO,
 } from "./actionNames";
 
 export const addTodo = (newTodo) => {
@@ -24,6 +25,12 @@ export const removeTodo = (id) => {
 export const removeCompletedTodo = () => {
   return {
     type: REMOVE_COMPLETED_TODO,
+  };
+};
+
+export const toggleAllTodo = () => {
+  return {
+    type: TOGGLE_ALL_TODO,
   };
 };
 

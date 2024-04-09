@@ -1,6 +1,6 @@
-import Header from "./components/Header";
+import Header from "./components/Header/Header";
 
-import TodoContainer from "./components/TodoContainer";
+import TodoContainer from "./components/TodoContainer/TodoContainer";
 
 function App() {
   return (

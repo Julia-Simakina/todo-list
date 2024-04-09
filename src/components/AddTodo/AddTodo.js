@@ -1,0 +1,60 @@
+import "./AddTodo.css";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addTodo, toggleAllTodo } from "../../store/actions/actions";
+import { filteredTodosSelector } from "../../store/selectors/selectors";
+
+const AddTodo = () => {
+  const todos = useSelector((state) => state.todos.todoList);
+  const { filteredTodos } = useSelector(filteredTodosSelector);
+
+  const [text, setText] = useState(""); //текст инпута
+  const dispatch = useDispatch();
+
+  const addNewTodo = (newTodo) => {
+    dispatch(addTodo(newTodo));
+  };
+
+  const toggleAllTodoChange = () => {
+    dispatch(toggleAllTodo());
+  };
+
+  const createTodo = (text, completed = false) => {
+    return {
+      id: Date.now(),
+      text,
+      completed,
+    };
+  };
+
+  const handleKeyDown = (event) => {
+    if (event.key === "Enter" && text.trim()) {
+      const newTodo = createTodo(text);
+      addNewTodo(newTodo);
+      setText("");
+    }
+  };
+
+  return (
+    <>
+      {Boolean(filteredTodos.length) && (
+        <input
+          type="checkbox"
+          className="all-completed"
+          onChange={toggleAllTodoChange}
+          checked={todos.every((todo) => todo.completed)}
+        />
+      )}
+
+      <input
+        onKeyDown={handleKeyDown}
+        className="todo-input"
+        placeholder="What needs to be done?"
+        value={text}
+        onChange={(e) => setText(e.target.value)}
+      />
+    </>
+  );
+};
+
+export default AddTodo;

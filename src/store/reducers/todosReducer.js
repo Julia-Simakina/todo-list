@@ -5,6 +5,7 @@ import {
   TOGGLE_TODO,
   EDIT_TODO,
   SET_VISIBILITY_FILTER,
+  TOGGLE_ALL_TODO,
 } from "../actions/actionNames";
 import { SHOW_ALL } from "../actions/actionNames";
 
@@ -49,6 +50,26 @@ export const todosReducer = (state = getInitialState(), action) => {
             : todo
         ),
       };
+    // case TOGGLE_ALL_TODO:
+    //   return {
+    //     ...state,
+    //     todoList: state.todoList.map((todo) => {
+    //       if (todo.completed) {
+    //         return { ...todo, completed: false };
+    //       } else return { ...todo, completed: true };
+    //     }),
+    //   };
+    case TOGGLE_ALL_TODO:
+      const allCompleted = state.todoList.every((todo) => todo.completed);
+      return {
+        ...state,
+        todoList: state.todoList.map((todo) => ({
+          ...todo,
+          completed: !allCompleted,
+        })),
+      };
+
+    // .every((elem) => elem >= 10)
     case EDIT_TODO:
       return {
         ...state,

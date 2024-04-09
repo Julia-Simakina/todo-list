@@ -1,7 +1,9 @@
-export default function EditField(props) {
+import "./EditField.css";
+
+const EditField = (props) => {
   return (
     <input
-      className='edit-field'
+      className="edit-field"
       autoFocus
       value={props.value}
       onChange={props.onChange}
@@ -9,4 +11,6 @@ export default function EditField(props) {
       onBlur={props.onBlur}
     />
   );
-}
+};
+
+export default EditField;
