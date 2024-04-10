@@ -19,6 +19,7 @@
 
 .item__description {
   max-width: 450px;
+  min-width: 400px;
   word-break: break-all;
   border: none;
   font-size: inherit;

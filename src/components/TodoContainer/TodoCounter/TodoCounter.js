@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import { filteredTodosSelector } from "../../store/selectors/selectors";
+import { filteredTodosSelector } from "../../../store/selectors/selectors";
 
 const TodoCounter = React.memo(() => {
   const { activeTodosCount } = useSelector(filteredTodosSelector);

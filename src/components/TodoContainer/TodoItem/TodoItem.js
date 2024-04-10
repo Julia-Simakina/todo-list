@@ -1,6 +1,10 @@
 import "./TodoItem.css";
 import { useDispatch } from "react-redux";
-import { removeTodo, toggleTodo, editTodo } from "../../store/actions/actions";
+import {
+  removeTodo,
+  toggleTodo,
+  editTodo,
+} from "../../../store/actions/actions";
 import { useState } from "react";
 import EditField from "../EditField/EditField";
 
@@ -33,12 +37,15 @@ const TodoItem = (props) => {
   };
 
   const checkEnterKey = (e) => {
+    if (e.key === "Escape") {
+      return handleExit();
+    }
     if (e.key !== "Enter") return;
 
     handleEditTodo();
   };
 
-  const handleBlur = () => {
+  const handleExit = () => {
     setEditId(null);
     setEditText(props.todo.text);
   };
@@ -76,7 +83,7 @@ const TodoItem = (props) => {
           value={editText}
           onChange={handleEditChange}
           onKeyDown={checkEnterKey}
-          onBlur={() => handleBlur()}
+          onBlur={handleExit}
         />
       )}
     </li>

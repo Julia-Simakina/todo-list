@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import {
   removeCompletedTodo,
   setVisibilityFilter,
-} from "../../store/actions/actions";
-import { filterButtons } from "../../utils/constants";
+} from "../../../store/actions/actions";
+import { filterButtons } from "../../../utils/constants";
 import FilterButton from "../FilterButton/FilterButton";
 import TodoCounter from "../TodoCounter/TodoCounter";
 import ClearCompletedButton from "../ClearCompletedButton/ClearCompletedButton";

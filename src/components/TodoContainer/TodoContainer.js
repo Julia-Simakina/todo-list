@@ -1,8 +1,9 @@
 import "./TodoContainer.css";
 
-import AddTodo from "../AddTodo/AddTodo";
-import TodoList from "../TodoList/TodoList";
-import Filtres from "../Filters/Filters";
+import AddTodo from "./AddTodo/AddTodo";
+import TodoList from "./TodoList/TodoList";
+import Filters from "./Filters/Filters";
+// import Filtres from "../Filters/Filters";
 
 const TodoContainer = () => {
   return (
@@ -10,7 +11,7 @@ const TodoContainer = () => {
       <div className="todo-container">
         <AddTodo />
         <TodoList />
-        <Filtres />
+        <Filters />
       </div>
     </>
   );

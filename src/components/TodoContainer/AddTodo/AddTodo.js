@@ -1,12 +1,14 @@
 import "./AddTodo.css";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addTodo, toggleAllTodo } from "../../store/actions/actions";
-import { filteredTodosSelector } from "../../store/selectors/selectors";
+import { addTodo, toggleAllTodo } from "../../../store/actions/actions";
+import { filteredTodosSelector } from "../../../store/selectors/selectors";
 
 const AddTodo = () => {
-  const todos = useSelector((state) => state.todos.todoList);
-  const { filteredTodos } = useSelector(filteredTodosSelector);
+  // const todos = useSelector((state) => state.todos.todoList);
+  const { filteredTodos, isAllCompletedChecked } = useSelector(
+    filteredTodosSelector
+  );
 
   const [text, setText] = useState(""); //текст инпута
   const dispatch = useDispatch();
@@ -42,7 +44,7 @@ const AddTodo = () => {
           type="checkbox"
           className="all-completed"
           onChange={toggleAllTodoChange}
-          checked={todos.every((todo) => todo.completed)}
+          checked={isAllCompletedChecked}
         />
       )}
 
